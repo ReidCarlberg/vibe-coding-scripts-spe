@@ -1,0 +1,34 @@
+These instructions are a continuation of the previous SharePoint Embedded demo app instructions.
+SharePoint Embedded (SPE) is all about using containers to manage documents.
+Here you will build container management functionality.
+You must be logged in to work with containers.
+any time you make an API call, you need to include an authorization bearer token.
+Display the list of containers on the logged in home page, and use a button to kick of the create a container process.
+
+-----------------------------------------------
+3. CONTAINERS
+-----------------------------------------------
+
+CREATE CONTAINER
+----------------
+Method: POST  
+URL: https://graph.microsoft.com/v1.0/storage/fileStorage/containers  
+Body JSON:
+{
+  "displayName": "Name of container",
+  "description": "Optional description",
+  "containerTypeId": "<value of CONTAINER_TYPE_ID>"
+}
+
+LIST CONTAINERS
+---------------
+Method: GET  
+URL format:
+https://graph.microsoft.com/v1.0/storage/fileStorage/containers
+  ?$select=id,displayName,description,containerTypeId,createdDateTime
+  &$filter=containerTypeId eq <value of CONTAINER_TYPE_ID>
+
+Important:
+- Do NOT add quotes around the containerTypeId
+- Do NOT include extra fields in the $select parameter
+- Clicking on the name of a container should open that container and list the files and folders inside.

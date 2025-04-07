@@ -1,0 +1,43 @@
+SHAREPOINT EMBEDDED (SPE) DEMO APP INSTRUCTIONS
+===============================================
+
+Dear Github Copilot, please create a simple demo app for SharePoint Embedded based on the following instructions.
+
+-----------------------------------------------
+0. Notes on user experience
+-----------------------------------------------
+- a vite react template is a good place to start
+- you will need a login page, a post login landing page, and the ability to log out.
+- There should be a subhead that says you must configure CLIENT_ID, TENANT_ID, and CONTAINER_TYPE_ID before this will work.
+- logout should take the user back to a login page.
+- DO NOT INCLUDE other functionality.
+
+
+-----------------------------------------------
+1. REQUIRED CONFIGURATION
+-----------------------------------------------
+
+Every SPE app must define these three non-secret values:
+
+CLIENT_ID=[uuid]  
+TENANT_ID=[uuid]  
+CONTAINER_TYPE_ID=[uuid]  
+
+You can safely include these values in your source code.
+You should keep these in a central configuration file so they are easy to update.
+
+-----------------------------------------------
+2. AUTHENTICATION (MSAL)
+-----------------------------------------------
+
+Use Microsoft Authentication Library (MSAL) to authenticate users.
+
+- if a user is not authenticated, they should only be able to see the login screen.
+- once a user is authenticated, they should go to the logged in dashboard.
+
+Login behavior:
+-You must call and await the initialize function before attempting to call any other MSAL API
+- Wait for user to click a login button before starting the flow
+
+Logout behavior:
+- Be sure to clear any local storage on logout to prevent data leakage.
