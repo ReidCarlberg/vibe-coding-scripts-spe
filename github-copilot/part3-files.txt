@@ -1,0 +1,38 @@
+OK now we're going to expand functionality to include file management.
+This is also a logged in only function.
+And it also required the authorization header.
+Important, file management is only available in the context of a container. 
+
+-----------------------------------------------
+4. FILES
+-----------------------------------------------
+
+UPLOAD FILE TO CONTAINER
+------------------------
+Method: PUT  
+URL format:
+https://graph.microsoft.com/v1.0/drives/<driveId>/items/<folderId>:/<fileName>:/content
+
+- A file must be uploaded into a particular driveId. 
+- If no folderId is provided, use 'root:' instead of '<folderId>:'
+- File upload should support selecting and uploading multiple files
+- Each file should be uploaded in its own PUT request with raw file content as the body
+- There should be a progress meter that fits within the UX
+- File upload user experience should expand to handle 30 files gracefully
+
+LIST FILES IN A CONTAINER
+--------------------------
+Method: GET  
+URL format:
+https://graph.microsoft.com/v1.0/drives/<containerId>/items/<folderId>/children
+  ?$expand=listItem($expand=fields)
+
+- listing of files must include the container name as part of a browsing path (eg "home > container name")
+- a list of files should generally be a line by line list and not a card style interface.
+- some results will be folders
+- If no folderId is specified, use 'root:'
+- if there is a folder, use it's name where it says "folderId" and remember what folder you are on.  the user should be able to click on a folder and see what's in the folder.
+- when the user is browsing a folder, there should be a path indicator that shows where the user is (eg "home > container name > folder")
+- when display folders or files, use clean iconography to indicate the file type and what actions are available
+- when in doubt, clicking on the name of folder should open that folder and list the contents.  
+- clicking on the name of a file should either open that file for editing or open for preview, depending on the file type.
